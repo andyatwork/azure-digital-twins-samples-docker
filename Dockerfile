@@ -4,3 +4,4 @@ COPY ./AdtSampleApp/* /usr/src/app/
 WORKDIR /usr/src/app
 RUN dotnet build
 CMD dotnet run
+ENTRYPOINT [ "/bin/bash", "-c", "while true ; do echo \"alive\" ; sleep 60; done" ]
