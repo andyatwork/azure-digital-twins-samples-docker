@@ -20,9 +20,11 @@ namespace SampleClientApp
             try
             {
                 // Read configuration data from the 
-                IConfiguration config = new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
-                    .Build();
+                var builder = new ConfigurationBuilder();
+                builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
+                builder.AddEnvironmentVariables(prefix: "APP_");
+
+                var config = builder.Build();
                 adtInstanceUrl = new Uri(config["instanceUrl"]);
             }
             catch (Exception ex) when (ex is FileNotFoundException || ex is UriFormatException)
